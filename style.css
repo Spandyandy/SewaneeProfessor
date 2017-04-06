@@ -1,0 +1,197 @@
+
+body{
+	background: #e6ffe6;
+	font-family: Verdana, Tahoma, Arial, sans-serif;
+	font-size: 18px;
+	overflow: auto;
+}
+h1, h2, h3{
+	text-align: center;
+	padding-left: 5%;
+	color: #878e63;
+}
+hr{
+    border: none;
+    height: 100px;
+    background-color: #878e63;
+}
+p{
+	padding: 2%;
+	color: #878E63;
+}
+img{
+	text-align: center;
+	mid-width: 100%;
+	height: auto;
+	width: auto;
+}
+#wrapper {
+	margin: 0 auto;
+	max-width: 1020px;
+	width:98%;
+	background: #FEFBE8;
+	border: 1px solid #878E63;
+	border-radius: 2px;
+	box-shadow: 0 0 10px 0px rgba(12, 3, 25, 0.8);
+}
+#callout{
+	width: 100;
+	height: auto;
+	background: #878E63;
+	overflow: hidden;
+}
+#callout p{
+	text-align: right;
+	font-size: 13px;
+	padding: 0.1% 5% 0 0;
+	color: #F1F0D1;
+}
+#callout p a{
+	color: #F1F0D1;
+	text-decoration: none;
+}
+
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding-left: 15%;
+}
+nav ul li{
+	float: left;
+	border: 1px solid #878E63;
+	width: 16%;
+}
+nav ul li a{
+	background: #F1F0D1;
+	display: block;
+	padding: 8% 12%;
+	font-weight: bold;
+	font-size: 18px;
+	color: #878E63;
+	text-decoration: none;
+	text-align:center;
+}
+nav ul li a:hover, nav ul li.active a{
+	background-color: #878E63;
+	color: #F1F0D1;
+}
+.banner img{
+	width: 100%;
+	border-top: 1px solid #878E63;
+	border-bottom: 1px solid #878E63;
+}
+.clearfix{
+	clear: both;
+}
+.left-col{
+	width: 55%;
+	float: left;
+	margin: -2% 1% 1% 1%;
+}
+.sidebar {
+	width: 40%;
+	float:right;
+	margin: 1%;
+	text-align: center;
+}
+.sidebar img{
+	width: 100%;
+}
+.creator{
+	float: left;
+	margin: 0 auto;
+	width: 100%;
+	height: auto;
+	padding: 1%;
+}
+.section{
+	width: 29%;
+	float: left;
+	margin: 2% 2%;
+	text-align: left;
+}
+.section img{
+	width: 100%;
+	height: 100%;
+}
+
+footer{
+	background: #878E63;
+	width: 100%;
+	overflow: hidden;
+}
+footer p, footer h3{
+	color: #F1F0D1;
+}
+footer p a {
+	color: #F1F0D1;
+	text-decoration: none;
+}
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+li {
+	display: inline;
+}
+#social img{
+	width: 50px;
+	height: 50px;
+}
+#logo img{
+	margin-top: 50px;
+	height: 100%;
+}
+#univLogo{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#titleLogo{
+	width:100%;
+}
+
+/*----This will make it mobile friendly or shrinked window size----*/
+@media screen and (max-width: 1000px){
+	body {
+		font-size: 30px;
+	}
+	nav {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	nav ul{
+		list-style: none;
+		margin: 0 auto;
+		padding-left: 0;
+	}
+	nav ul li{
+		text-align: center;
+		margin-left: 0 auto;
+		width: 100%;
+		border-top: 1px solid #878E63;
+		border-right: 0px solid #878E63;
+		border-bottom: 1px solid #878E63;
+		border-left: 0px solid #878E63;
+	}
+	nav ul li a{
+		padding: 8px; 0;
+		font-size: 70px;
+	}
+	.left-col{
+		width:100%;
+	}
+	.sidebar{
+		width:50%;
+		margin-right:25%;
+	}
+	.section{
+		float: left;
+		width:100%;
+		margin: 0;
+	}
+	#ref{
+		font-size:20px;
+	}
+}
