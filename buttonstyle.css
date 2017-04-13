@@ -1,0 +1,20 @@
+  clear: left;
+  text-align: center;
+
+#sign{
+  position:absolute;
+  top:120px;
+  left:690px;
+}
+
+
+#prof{
+  position:absolute;
+  top:400px;
+  left:300px;
+}
+
+#stud{
+  position:absolute;
+  top:400px;
+  left:1000px;

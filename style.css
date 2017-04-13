@@ -25,6 +25,9 @@ img{
 	height: auto;
 	width: auto;
 }
+
+a{text-decoration: none;}
+
 #wrapper {
 	margin: 0 auto;
 	max-width: 1020px;
@@ -35,7 +38,7 @@ img{
 	box-shadow: 0 0 10px 0px rgba(12, 3, 25, 0.8);
 }
 #callout{
-	width: 100;
+	width: 100%;
 	height: auto;
 	background: #878E63;
 	overflow: hidden;
@@ -46,9 +49,9 @@ img{
 	padding: 0.1% 5% 0 0;
 	color: #F1F0D1;
 }
-#callout p a{
+#callout p a,footer p a,footer p, footer h3{
 	color: #F1F0D1;
-	text-decoration: none;
+	
 }
 
 nav ul {
@@ -108,7 +111,7 @@ nav ul li a:hover, nav ul li.active a{
 	width: 29%;
 	float: left;
 	margin: 2% 2%;
-	text-align: left;
+	text-align: center;
 }
 .section img{
 	width: 100%;
@@ -120,13 +123,15 @@ footer{
 	width: 100%;
 	overflow: hidden;
 }
-footer p, footer h3{
+{
 	color: #F1F0D1;
 }
-footer p a {
-	color: #F1F0D1;
-	text-decoration: none;
+
+footer div.section a:hover{
+	color:#33FFBD;
 }
+
+
 ul{
 	list-style-type: none;
 	margin: 0;
@@ -141,7 +146,7 @@ li {
 }
 #logo img{
 	margin-top: 50px;
-	height: 100%;
+	height: 10%;        /*100%*/
 }
 #univLogo{
 	display: block;

@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="style.css">
+
+<style>
+.buttons{
+  clear: left;
+  text-align: center;
+  margin-top:15%;
+  margin-bottom:15%;
+}
+
+/*Not working*/
+.buttons a:active{
+  -ms-transform: scale(-.9, -.9); 
+  -webkit-transform: scale(-.9, -.9);
+  transform: scale(-.9, -.9);
+}
+
+.buttons a{
+  background:rgba(242,121,222,0.5); 
+  color:white;
+  
+  padding:2% 5% 2% 5%;
+  border:6px solid #A30A87;
+  
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 23px;
+}
+
+.buttons p{
+  margin-top:15%;
+}
+
+.buttons a:hover{
+  transition-property:background,border;
+  transition-duration:.9s;
+  transition-delay:0.1s;
+  transition-timing-function:ease-out;
+  background-color:rgba(0,199,199,1); 
+  
+
+  border:7px solid #017D7D;
+  font-size: 25px
+}
+
+#prof{
+  margin-right:10%;
+}
+
+#stud{
+  margin-left:10%;
+}
+
+#ref a{
+  color:#9C734F;
+}
+#ref a:hover{
+  color:blue;
+}
+
+</style>
+
+
+
 <head>
   <title>Andy_Emmanuel</title>
 </head>
@@ -13,8 +75,8 @@
      <img id="titleLogo" src="http://www.sewaneevillage.com/sba/files/stacks-image-ba97a9d.png"/>
     <nav>
     	<ul>
-    		<li class='active'><a href="#">Home</a></li>
-    		<li><a href="">About</a></li>
+    		<li class='active'><a href="index.html">Home</a></li>
+    		<li><a href="About.html">About</a></li>
     		<li><a href="">Ratings</a></li>
     		<li><a href="">Feedback</a></li>
     		<li><a href="">Search</a></li>
@@ -25,14 +87,27 @@
     	<img src="http://www.sewanee.edu/media/homepage/features/homefeature-promise.jpg"/>
     </div>
     
-    <img id="univLogo" src="https://upload.wikimedia.org/wikipedia/en/1/12/The_Seal_of_The_University_of_the_South.png"/>
+  <div class = "buttons">
+    <a href="" id="sign"> SIGN UP</a>
+	
+    <p><a href="proflogin.html" id="prof"> PROFESSOR LOGIN</a> 
+       <a href="" id="stud"> STUDENT LOGIN</a></p>
+  </div>
+	
+
     
     <section class="left-col">
-    	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+    	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard 
+		dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+		It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was 
+		popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
+		software like Aldus PageMaker including versions of Lorem Ipsum. </p>
     	<p>Zechariah 9:9
-		9 Rejoice greatly, Daughter Zion! Shout, Daughter Jerusalem! See, your king comes to you, righteous and victorious, lowly and riding on a donkey, on a colt, the foal of a donkey. </p>
+		9 Rejoice greatly, Daughter Zion! Shout, Daughter Jerusalem! See, your king comes to you, righteous and victorious, lowly and riding on 
+		a donkey, on a colt, the foal of a donkey. </p>
 		<p>Matthew 20:18-19
-		18 “We are going up to Jerusalem, and the Son of Man will be delivered over to the chief priests and the teachers of the law. They will condemn him to death 19 and will hand him over to the Gentiles to be mocked and flogged and crucified. On the third day he will be raised to life!” </p>
+		18 “We are going up to Jerusalem, and the Son of Man will be delivered over to the chief priests and the teachers of the law. They will 
+		condemn him to death 19 and will hand him over to the Gentiles to be mocked and flogged and crucified. On the third day he will be raised to life!” </p>
     </section>
     <aside class="sidebar">
     	<div class="creator">
@@ -60,31 +135,40 @@
 
     <div class="clearfix"></div>
     <hr>
+	
+	  
+
+  
     <img id=univLogo src="https://upload.wikimedia.org/wikipedia/en/1/12/The_Seal_of_The_University_of_the_South.png"/>
     <center><h1>What do I use this website for?</h1></center>
     <div class="section">
     	<h3>Professor Review</h3>
     	<img src="http://dailynexus.com/wp-content/uploads/2016/02/Professor_courtesy-of-RateMyProfessor-1.jpg"/>
-    	<p>You can write a review or rate your professors! You have an option to write it anonymously, but be responsible for what you write. Before you register for class, this feature can be a good thing to look up what other students' opinon about the professor you are willing to take!</p>
+    	<p>You can write a review or rate your professors! You have an option to write it anonymously, but be responsible for 
+		what you write. Before you register for class, this feature can be a good thing to look up what other students' opinon about the 
+		professor you are willing to take!</p>
     </div>
     <div class="section">
     	<h3>Office Hour</h3>
     	<img src="https://www.ncmic.com/webres/Image/prc/blog/office-staff/office-hours.jpg"/>
-    	<p>Are you struggling arranging time with your professor? Here are some list of organized office hours! Make sure to check with your professor whether this office hour is up to date!</p>
+    	<p>Are you struggling arranging time with your professor? Here are some list of organized office hours! Make sure to check with your professor 
+		whether this office hour is up to date!</p>
     </div>
     <div class="section">
     	<h3>Blah Blah</h3>
     	<img src="http://www.sewanee.edu/media/academics/dupont-474x316.jpg"/>
-    	<p>Are you struggling arranging time with your professor? Here are some list of organized office hours! Make sure to check with your professor whether this office hour is up to datehen an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions</p>
+    	<p>Are you struggling arranging time with your professor? Here are some list of organized office hours! Make sure to check with your professor whether 
+		this office hour is up to datehen an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only 
+		five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of 
+		Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions</p>
     </div>
     <div class="clearfix"></div>
     
     <h3>References to build this website</h3>
     <div id="ref">
-    <p>Navigation Bars : https://www.w3schools.com/css/css_navbar.asp	</p>
-    <p>@mediaRule: https://www.w3schools.com/cssref/css3_pr_mediaquery.asp</p>
-	<p>box-shadow Property: https://www.w3schools.com/cssref/css3_pr_box-shadow.asp
-    </p>
+    <p><a href="https://www.w3schools.com/css/css_navbar.asp">Navigation Bars</a></p>
+    <p><a href="https://www.w3schools.com/cssref/css3_pr_mediaquery.asp">@mediaRule </a></p>
+    <p><a href="https://www.w3schools.com/cssref/css3_pr_box-shadow.asp">box-shadow Property </a> </p>
     </div>
     
     
@@ -94,11 +178,20 @@
 
     <footer>
     	<div class="section">
-    		<p>ANDY KIM & EMMANUEL</p>
-    		<p><b>931-223-4066</b><br>
+     		<p>ANDY KIM & EMMANUEL</p>
+    		
+			<p>ANDY KIM</p>
+			<p><b>931-223-4066</b><br>
     		735 University Ave.<br>
     		Sewanee, Tennessee<br>
-    		kimj0@sewanee.edu</p>
+    		<a href = "mailto:kimj0@sewanee.edu">kimj0@sewanee.edu</a></p>
+			
+			<br>
+			<p> EMMANUEL OLULOTO</p>
+    		<p><b>931-636-8530</b><br>
+    		735 University Ave.<br>
+    		Sewanee, Tennessee<br>
+    		<a href = "mailto:oluloep0@sewanee.edu">oluloep0@sewanee.edu</a></p>
     	</div>
 
     	<div class="section"><div id="social">
@@ -118,6 +211,6 @@
     	</div>
     </footer>
   </div>
-  	<p style="text-align:center">&#169;Copyright - Andy Kim/Emmanuel Oluloto, 2017</p>
+  	<p style="text-align:center">&#169;Copyright - Andy Kim/Emmanuel Oluloto, 2017.</p>
  </body>
 </html>
