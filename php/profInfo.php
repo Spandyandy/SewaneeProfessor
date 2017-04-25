@@ -17,11 +17,11 @@
      <img id="titleLogo" src="http://www.sewaneevillage.com/sba/files/stacks-image-ba97a9d.png"/>
     <nav>
     	<ul>
-        <li class='active'><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/index1.html">Home</a></li>
+        <li><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/index1.html">Home</a></li>
         <li><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/html/About.html">About</a></li>
         <li><a href="">Ratings</a></li>
         <li><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/php/department.php">Department</a></li>
-        <li><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/php/displayProfs.php">Professor</a></li>
+        <li class='active'><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/php/displayProfs.php">Professor</a></li>
       </ul>
     	<div class="clearfix"></div>
     </nav>	
