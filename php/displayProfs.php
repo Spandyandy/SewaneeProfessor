@@ -6,7 +6,7 @@
 </style>
 
 <head>
-  <title>Andy_Emmanuel</title>
+  <title>All Professors</title>
 </head>
 
 <body>
@@ -28,6 +28,7 @@
 
     
   
+
 
 
 
@@ -57,7 +58,7 @@
       $row = $result->fetch_array(MYSQLI_NUM);
       echo <<<_END
       
-            <input type="radio" name="prof" value="$row[0]"> $row[1] $row[2] <br>
+            <input style='line-height: 10px;' type="radio" name="prof" value="$row[0]"> $row[1] $row[2] 
        
 _END;
     }    

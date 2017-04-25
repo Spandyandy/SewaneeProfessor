@@ -1,12 +1,11 @@
-<!Junghoo Kim 
-  Emmanuel Oluloto
+<! Emmanuel Oluloto
    CS 284
    Checkpoint 4
 >
 
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="style.css">
 
 <style>
 
@@ -14,7 +13,7 @@
 </style>
 
 <head>
-  <title>Departments</title>
+  <title>Professors in the Department</title>
 </head>
 
 <body>
@@ -25,11 +24,11 @@
      <img id="titleLogo" src="http://www.sewaneevillage.com/sba/files/stacks-image-ba97a9d.png"/>
     <nav>
     	<ul>
-    		<li><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/index1.html">Home</a></li>
-    		<li><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/html/About.html">About</a></li>
+    		<li class='active'><a href="index.html">Home</a></li>
+    		<li><a href="About.html">About</a></li>
     		<li><a href="">Ratings</a></li>
-    		<li class='active'><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/php/department.php">Department</a></li>
-        <li><a href="http://hive.sewanee.edu/kimj0/CS284/FinalGit/php/displayProfs.php">Professor</a></li>
+    		<li><a href="">Feedback</a></li>
+    		<li><a href="">Search</a></li>
     	</ul>
     	<div class="clearfix"></div>
     </nav>	
@@ -46,33 +45,42 @@
   
   
 
-  echo "Select your name and press SELECT Department.<br>";
+  echo "Press SELECT PROFESSOR to see more informati0on about each professor.<br>";
   
+  $deptID = get_post($connection, 'dept');
   
-  // DISPLAYING DATA IN TABLES        
-  $query = "SELECT * FROM departments";
+  if($deptID == '') echo "Go back and try again.";
+
+     
+  $query = "SELECT profTable.profID,first_name, last_name, dept, courseNo FROM profTable,whoTeachesWhat,departments  
+     WHERE whoTeachesWhat.deptID = departments.deptID
+     AND  whoTeachesWhat.profID = profTable.profID
+     AND  departments.deptID = $deptID";
+
+  
           
   $result = $connection->query($query);
  
   if (!$result) die ("Database access failed!!: " . $connection->error);
     $rows = $result->num_rows;
     
-  echo '<pre><form action="profsByDept.php" method="post"> <div class ="set">' ;
+  echo '<pre><form action="profInfo.php" method="post"> <div class ="set">' ;
     
-    for ($i = 0; $i < $rows; $i++){
-      $result->data_seek($i);
+    for ($j = $rows-1 ; $j >= 0; $j--){
+      $result->data_seek($j);
       $row = $result->fetch_array(MYSQLI_NUM);
       echo <<<_END
-      
-            <input style='line-height: 50px;' type="radio" name="dept" value="$row[0]"> $row[1] $row[2] <br>
-       
+      <pre>
+           <input type="radio" name="prof" value="$row[0]"> $row[1] $row[2] <br>
+                <span> $row[3] <b>$row[4]</b> </span>
+       </pre>
 _END;
     }    
   
-  echo '
-        <input type="submit" value="SELECT DEPARTMENT">
+  echo '<input type="submit" value="SELECT PROFESSOR">
        </div> </form></pre>';    
 
+    
   $result->close;
   $connection->close;
     
@@ -83,8 +91,6 @@ _END;
     
   
 ?>
- 
- 
      <hr>
     <img id=univLogo src="https://upload.wikimedia.org/wikipedia/en/1/12/The_Seal_of_The_University_of_the_South.png"/>
 

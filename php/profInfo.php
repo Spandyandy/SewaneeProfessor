@@ -6,7 +6,7 @@
 </style>
 
 <head>
-  <title>Andy_Emmanuel</title>
+  <title>Professor Information</title>
 </head>
 
 <body>
@@ -31,6 +31,8 @@
 
 
 
+
+
 <?php
   // Usual connection to database
   require_once('login.php');
@@ -38,9 +40,21 @@
   $connection = new mysqli( $host, $user, $pass, $db );
   if ($connection->connect_error) die ('did not connect!');
   
-  
+     // Setup for deleting entry from table
+  if(isset($_POST['delete']) && isset($_POST['profID'])){
+    $profID = get_post($connection, 'profID'); 
+    $query = "DELETE FROM profTable WHERE profID = $profID";
+    
+    $result = $connection->query($query);
+    
+    if(!$result) echo "DELETE failed: $query <br>".$connection->error."<br><br>";
+    echo"Your account was deleted. Thanks for your service!<br>";
+    
+  }else{    
+
    // Setup for PRINTING entry from table
-    $profID = get_post($connection, 'prof'); 
+  $profID = get_post($connection, 'prof'); 
+
   $query = "SELECT * FROM profTable WHERE profID = $profID";
           
   $result = $connection->query($query);
@@ -54,16 +68,18 @@
       echo <<<_END
         <div class ="set">
         <pre>
-          ID Number    $row[0]
-          First Name   $row[1]
-          Last Name    $row[2]
+
+          Professor $row[1] $row[2]
           Email        $row[3]
           Phone        $row[4]
-        </pre>
-          </div>
+
 _END;
+
   }
-  $query = "SELECT COUNT(*) FROM profTable, hasLiked
+  
+  
+
+  $query = "SELECT COUNT(*),profTable.profID FROM profTable, hasLiked
             WHERE profTable.profID = hasLiked.profID
             AND   profTable.profID = $profID";
   $result = $connection->query($query);
@@ -77,11 +93,23 @@ _END;
       echo <<<_END
         <div class ="set">
         <pre>
-          Number of Likes    $row[0]
+          Student Approval    $row[0]
         </pre>
+
+          <form action="profInfo.php" method="post" class="button">
+            <input type="hidden" name="delete" value="yes">
+            <input type="hidden" name="profID" value="$row[1]">
+            <input type="submit" value="DELETE RECORD">
+          </form>        
+          </div>        
+        
           </div>
 _END;
+
   }
+  
+ } 
+
     
   $result->close;
   $connection->close;
@@ -93,7 +121,6 @@ _END;
     
   
 ?>
- 
  
      <hr>
     <img id=univLogo src="https://upload.wikimedia.org/wikipedia/en/1/12/The_Seal_of_The_University_of_the_South.png"/>
