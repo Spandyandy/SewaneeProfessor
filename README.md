@@ -1,4 +1,0 @@
-# SewaneeProfessor
-# SewaneeProfessor
-# SewaneeProfessor
-# SewaneeProfessor

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>sample</title>
+		<meta charset = "utf-8" />
+		<meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" />
+		<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+	</head>
+	<body>
+	<!-- TOP-NAV HTML -->
+	<div class="top-nav clearfix">
+		<a href="index.html" class="logo">
+			<img src="image/logo2.png" alt="Sewanee"/>
+		</a>
+		<div id="nav-searchbar">
+			<form method="GET" action="index.html">
+				<input type="text" name="search" id="nav-search" placeholder="Search"/>
+			</form>
+		</div>
+		<ul>
+			<li><a href="displayProfs.php">Professor List</a></li>
+			<li><a href="department.php">Departments</a></li>
+			<li><a href="#">Sign Up</a></li>
+			<li><a href="#">Log in</a></li>
+		</ul>
+	</div>
+
+
+		<!-- JUMBOTRON-SLIDER -->
+		<div id="jumbotron-wrapper">
+			<div id="jumbotron-arrow-wrapper clear fix">
+				<div class="jumbotron-arrow" id="left-jumbotron"><span class="ion-chevron-left"></span></div>
+				<div class="jumbotron-arrow" id="right-jumbotron"><span class="ion-chevron-right"></span></div>
+			</div>
+			<div id="slides-wrapper">
+				<div class="slide active">
+					<a href="http://www.sewanee.edu/admission/why-sewanee/#the-domain"><img src="image/domain.jpg"/></a>
+				</div>
+				<div class="slide">
+					<a href="http://www.sewanee.edu/admission/why-sewanee/#the-sewanee-pledge"><img src="image/kids.jpg"/></a>
+				</div>
+				<div class="slide">
+					<a href="http://www.sewanee.edu/features/story/ato-spring.html"><img src="image/promise.jpg"/></a>
+				</div>
+			</div>
+		    <div id ="slides-dots">
+		    	<div class="dot active"></div>
+		        <div class="dot"></div>
+		        <div class="dot"></div>
+		     </div>
+		</div>
+
+
+	<!-- MOTO -->
+	<div class="row">
+		<h1 id="moto"><span>Registration?</span> Find Professor information <br />to help you with registration.</h1>
+	</div>
+	<!-- SEARCHBAR -->
+	<div id ="searchbar-wrapper">
+	<div class="row">
+			<form method="POST" action="index.html" id="searchbar">
+				<input type="text" name="destination" placeholder="Name, Department, Class"/><input type="submit" name="search" value="Search"/>
+			</form>
+	</div>
+	</div>
+
+<!-- DISPLAY SLIDERS -->
+<div id="display-sliders-wrapper">
+<div class="row">
+	<!-- first row -->
+	<a href="department.php"><h3 class="ds-title">Professors</h3></a>
+	<div class="display-slider">
+		<div class="ds-div">
+			<p>#1</p>
+		</div><div class="ds-div">
+			<p>#2</p>
+		</div><div class="ds-div">
+			<p>#3</p>
+		</div><div class="ds-div">
+			<p>#4</p>
+		</div>
+	</div>
+	<!-- second row -->
+	<a href="department.php"><h3 class="ds-title">Departments</h3></a>
+	<div class="display-slider">
+		<div class="ds-div">
+			<p>#1</p>
+		</div><div class="ds-div">
+			<p>#2</p>
+		</div><div class="ds-div">
+			<p>#3</p>
+		</div><div class="ds-div">
+			<p>#4</p>
+		</div>
+	</div>
+	<!-- third row -->
+	<a href="department.php"><h3 class="ds-title">Courses</h3></a>
+	<div class="display-slider">
+		<div class="ds-div">
+			<p>#1</p>
+		</div><div class="ds-div">
+			<p>#2</p>
+		</div><div class="ds-div">
+			<p>#3</p>
+		</div><div class="ds-div">
+			<p>#4</p>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<span style="display:block; height: 500px;"></span>
+<!-- footer -->
+<footer>
+	<div class="section">
+		<p>ANDY KIM & EMMANUEL</p>
+
+	<p>ANDY KIM</p>
+	<p><b>931-223-4066</b><br>
+		735 University Ave.<br>
+		Sewanee, Tennessee<br>
+		<a href = "mailto:kimj0@sewanee.edu">kimj0@sewanee.edu</a></p>
+
+	<br>
+	<p> EMMANUEL OLULOTO</p>
+		<p><b>931-636-8530</b><br>
+		735 University Ave.<br>
+		Sewanee, Tennessee<br>
+		<a href = "mailto:oluloep0@sewanee.edu">oluloep0@sewanee.edu</a></p>
+	</div>
+
+	<div class="section"><div id="social">
+		<p>Connect with us!</p>
+		<ul>
+			<li><a href="#"><img src="https://www.w3newbie.com/wp-content/uploads/googleplus.png"/></a></li>
+			<li><a href="#"><img src="https://www.w3newbie.com/wp-content/uploads/facebook1.png"/></a></li>
+			<li><a href="#"><img src="https://www.w3newbie.com/wp-content/uploads/twitter1.png"/></a></li>
+			<li><a href="#"><img src="https://www.w3newbie.com/wp-content/uploads/youtube1.png"/></a></li>
+		</ul>
+
+	</div></div>
+			<img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Sewanee.png"/>
+</footer>
+
+<p style="text-align:center">&#169;Copyright - Andy Kim/Emmanuel Oluloto, 2017.</p>
+
+
+<!-- JAVASCRIPT IMPORT -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="functions.js"></script>
+</body>
+</html>
