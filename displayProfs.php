@@ -25,16 +25,17 @@
   			</form>
   		</div>
   		<ul>
-  			<li><a href="displayProfs.php">Professor List</a></li>
-  			<li><a href="department.php">Departments</a></li>
-  			<li><a href="#">Sign Up</a></li>
-  			<li><a href="#">Log in</a></li>
+		    <li><a href="about.html">About</a></li>
+			<li><a href="displayProfs.php">Professor List</a></li>
+			<li><a href="department.php">Departments</a></li>
+			<li><a href="createaccount.php">Student Sign Up</a></li>
+			<li><a href="accountlogin.php">Student Log in</a></li>
   		</ul>
   	</div>
 
 <span style="display:block; height: 100px;"></span>
     <div class="row">
-      <h1 id="moto"><span>Select</span> Professor's name and press <br><span>"SELECT DEPARTMENT".</span></h1>
+      <h1 id="moto">To see a professor's details, select the Professor's name and press <br><span>"SELECT PROFESSOR".</span></h1>
     </div>
 
 
@@ -65,14 +66,17 @@
 _END;
     }
 
-  echo '</div></form></pre>
+  echo <<<_END
         <input type="submit" value="SELECT PROFESSOR">
+        </div></form></pre>
+        
         <div class="row">
-        <h1 id="moto"><span>Create</span> new account by pressing <br>
-        <span>"CREATE NEW ACCOUNT".</span></h1>
+        <h1 id="moto">If you're a professor without an account, you can set up a new account by selecting the 
+        <span> CREATE NEW ACCOUNT</span> button below. </h1>
         </div>
-        <form action="proflogin.html" method="post">
-        <input type="submit" value="CREATE NEW ACCOUNT"></form>';
+        <form action="newprof.php" method="post">
+        <input type="submit" value="CREATE NEW ACCOUNT" style=""></form>;
+_END;
 
   $result->close;
   $connection->close;

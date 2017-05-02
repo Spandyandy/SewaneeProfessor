@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Sewanee Professor</title>
+		<title>View Professors</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" />
@@ -25,10 +25,11 @@
   			</form>
   		</div>
   		<ul>
-  			<li><a href="displayProfs.php">Professor List</a></li>
-  			<li><a href="department.php">Departments</a></li>
-  			<li><a href="#">Sign Up</a></li>
-  			<li><a href="#">Log in</a></li>
+		    <li><a href="about.html">About</a></li>
+			<li><a href="displayProfs.php">Professor List</a></li>
+			<li><a href="department.php">Departments</a></li>
+			<li><a href="createaccount.php">Student Sign Up</a></li>
+			<li><a href="accountlogin.php">Student Log in</a></li>
   		</ul>
   	</div>
 
@@ -60,7 +61,10 @@
   $result = $connection->query($query);
 
   if (!$result) die ("Database access failed!!: " . $connection->error);
-    $rows = $result->num_rows;
+  $rows = $result->num_rows;
+    
+  if($rows == 0)  
+    echo "<div style='text-align:center;font-size:60px;color:gray;'><i>(No professors listed here yet.)</i></div>";
 
   echo '<pre><form action="profInfo.php" method="post"> <div class ="set">' ;
 

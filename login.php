@@ -1,6 +1,6 @@
 <?php 
 
-  $host = "crisler.sewanee.edu";
+  $host = "cook.sewanee.edu";
   $user = "webuser";
   $pass = "9083ughf4";
   $db   = "professorArchives";

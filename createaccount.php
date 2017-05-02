@@ -7,11 +7,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Sewanee Departments </title>
+		<title>Sewanee Student Login</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" />
-		<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 		<link rel="stylesheet" type="text/css" href="stylingPHP.css"/>
 	</head>
 	<body>
@@ -30,49 +29,65 @@
 			<li><a href="displayProfs.php">Professor List</a></li>
 			<li><a href="department.php">Departments</a></li>
 			<li><a href="createaccount.php">Student Sign Up</a></li>
-			<li><a href="accountlogin.php">Student Log in</a></li>
+			<li><a href="accountlogin.php">Student Log In</a></li>
   		</ul>
   	</div>
 
 <span style="display:block; height: 100px;"></span>
     <div class="row">
-      <h1 id="moto"><span>Select</span> department and click the <br><span>"SELECT DEPARTMENT"</span> button
-         to see the professors with classes in those departments.</h1>
+      <h1 id="moto"><span>Enter your username and password to sign in! </span></h1>
     </div>
 
 
 <?php
   // Usual connection to database
   require_once('login.php');
+
   $connection = new mysqli( $host, $user, $pass, $db );
   if ($connection->connect_error) die ('did not connect!');
+  
+  
 
+   // Setup for inserting into users
+   
+  if (isset($_POST['username'])      &&
+      isset($_POST['sewanee_Email']) &&
+      isset($_POST['first_Year'])    &&
+      isset($_POST['password']) ) {
+ 
+  $username      = get_post($connection, 'username');
+  $sewanee_Email = get_post($connection, 'sewanee_Email');
+  $first_Year    = get_post($connection, 'first_Year');
+  $password      = get_post($connection, 'password');
 
-
-
-  // DISPLAYING DATA IN TABLES
-  $query = "SELECT * FROM departments";
+  $query = "INSERT INTO studentTable (username, sewanee_Email, first_Year, password) 
+                        VALUES('$username', '$sewanee_Email', $first_Year, '$password')";
+  
+  //echo $query;
+  
 
   $result = $connection->query($query);
 
-  if (!$result) die ("Database access failed!!: " . $connection->error);
-    $rows = $result->num_rows;
+    echo "<div class='row'><h1 id='moto'>";
+    if (!$result) //die ("Database access failed!!: " . $connection->error);
+        echo "<br> <b>ERROR!</b> Try a new username and MAKE SURE that the <span>First Year</span> is a number. <br>";
+    else  echo "<br> You are now in the system! Log in by clicking the <span> Student Log In </span> link in the nagivation bar <b>above</b>.<br>";
+    echo "</h1></div>";
+  }
 
-  echo '<pre><form action="profsByDept.php" method="post"> <div class ="set">' ;
-
-    for ($i = 0; $i < $rows; $i++){
-      $result->data_seek($i);
-      $row = $result->fetch_array(MYSQLI_NUM);
+  
+  
       echo <<<_END
-
-            <input style='line-height: 50px;' type="radio" name="dept" value="$row[0]"> $row[1] $row[2] <br>
+         <form action="createaccount.php" method="post"><pre>
+         Username:    <input type="text"     name="username" value=''> <br><br><br>
+         Email:       <input type="text"     name="sewanee_Email" value=''placeholder=SEWANEE E-mail> <br><br><br>
+         First Year:  <input type="text"     name="first_Year" value='' placeholder="When you came to Sewanee">    <br><br><br>
+         Password:    <input type="password" name="password" value=''> <br><br><br>
+    
+        <input type="submit" value="SIGN UP">
+        </pre></form>
 
 _END;
-    }
-
-  echo '
-        <input type="submit" name="search" value="SELECT DEPARTMENT"/>
-       </div> </form></pre>';
 
   $result->close;
   $connection->close;
@@ -81,6 +96,8 @@ _END;
   function get_post($connection, $var){
     return $connection->real_escape_string($_POST[$var]);
   }
+
+
 ?>
 
 <span style="display:block; height: 200px;"></span>

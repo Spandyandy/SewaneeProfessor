@@ -7,11 +7,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Sewanee Departments </title>
+		<title>Sewanee Professor</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" />
-		<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 		<link rel="stylesheet" type="text/css" href="stylingPHP.css"/>
 	</head>
 	<body>
@@ -36,43 +35,87 @@
 
 <span style="display:block; height: 100px;"></span>
     <div class="row">
-      <h1 id="moto"><span>Select</span> department and click the <br><span>"SELECT DEPARTMENT"</span> button
-         to see the professors with classes in those departments.</h1>
+      <h1 id="moto"><span>Click "DELETE RECORD"</span> button <br> in order to <span>delete</span> this professor's information.</h1>
     </div>
 
 
 <?php
   // Usual connection to database
   require_once('login.php');
+
   $connection = new mysqli( $host, $user, $pass, $db );
   if ($connection->connect_error) die ('did not connect!');
 
+     // Setup for deleting entry from table
+  if(isset($_POST['delete']) && isset($_POST['profID'])){
+    $profID = get_post($connection, 'profID');
+    $query = "DELETE FROM profTable WHERE profID = $profID";
 
+    $result = $connection->query($query);
 
+    if(!$result) echo "DELETE failed: $query <br>".$connection->error."<br><br>";
+    echo"Your account was deleted. Thanks for your service!<br>";
 
-  // DISPLAYING DATA IN TABLES
-  $query = "SELECT * FROM departments";
+  }else{
+
+   // Setup for PRINTING entry from table
+  $profID = get_post($connection, 'prof');
+
+  $query = "SELECT * FROM profTable WHERE profID = $profID";
 
   $result = $connection->query($query);
 
   if (!$result) die ("Database access failed!!: " . $connection->error);
     $rows = $result->num_rows;
 
-  echo '<pre><form action="profsByDept.php" method="post"> <div class ="set">' ;
-
-    for ($i = 0; $i < $rows; $i++){
-      $result->data_seek($i);
+ for ($j = $rows-1 ; $j >= 0; $j--){
+      $result->data_seek($j);
       $row = $result->fetch_array(MYSQLI_NUM);
       echo <<<_END
+        <div class ="set">
+        <pre>
 
-            <input style='line-height: 50px;' type="radio" name="dept" value="$row[0]"> $row[1] $row[2] <br>
+          Professor $row[1] $row[2]
+          Email        $row[3]
+          Phone        $row[4]
 
 _END;
-    }
 
-  echo '
-        <input type="submit" name="search" value="SELECT DEPARTMENT"/>
-       </div> </form></pre>';
+  }
+
+
+
+  $query = "SELECT COUNT(*),profTable.profID FROM profTable, hasLiked
+            WHERE profTable.profID = hasLiked.profID
+            AND   profTable.profID = $profID";
+  $result = $connection->query($query);
+
+  if (!$result) die ("Database access failed!!: " . $connection->error);
+    $rows = $result->num_rows;
+
+ for ($j = $rows-1 ; $j >= 0; $j--){
+      $result->data_seek($j);
+      $row = $result->fetch_array(MYSQLI_NUM);
+      echo <<<_END
+        <div class ="set">
+        <pre>
+          Student Approval    $row[0]
+        </pre>
+
+          <form action="profInfo.php" method="post" class="button">
+            <input type="hidden" name="delete" value="yes">
+            <input type="hidden" name="profID" value="$row[1]">
+            <input type="submit" value="DELETE RECORD">
+          </form>
+          </div>
+
+          </div>
+_END;
+
+  }
+
+ }
+
 
   $result->close;
   $connection->close;
@@ -81,6 +124,8 @@ _END;
   function get_post($connection, $var){
     return $connection->real_escape_string($_POST[$var]);
   }
+
+
 ?>
 
 <span style="display:block; height: 200px;"></span>

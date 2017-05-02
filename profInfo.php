@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Sewanee Professor</title>
+		<title>Detailed Professor Information</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" />
@@ -25,16 +25,17 @@
   			</form>
   		</div>
   		<ul>
-  			<li><a href="displayProfs.php">Professor List</a></li>
-  			<li><a href="department.php">Departments</a></li>
-  			<li><a href="#">Sign Up</a></li>
-  			<li><a href="#">Log in</a></li>
+		    <li><a href="about.html">About</a></li>
+			<li><a href="displayProfs.php">Professor List</a></li>
+			<li><a href="department.php">Departments</a></li>
+			<li><a href="createaccount.php">Student Sign Up</a></li>
+			<li><a href="accountlogin.php">Student Log in</a></li>
   		</ul>
   	</div>
 
 <span style="display:block; height: 100px;"></span>
     <div class="row">
-      <h1 id="moto"><span>Click "DELETE RECORD"</span> button <br> in order to <span>delete</span> record of this professor.</h1>
+      <h1 id="moto">If you are signed in as the professor, you can delete your account by selecting the <span>DELETE ACCOUNT</span> button below.</h1>
     </div>
 
 
@@ -71,12 +72,13 @@
       $result->data_seek($j);
       $row = $result->fetch_array(MYSQLI_NUM);
       echo <<<_END
-        <div class ="set">
+        <div class ="set" style="background:#F9C7FF;font-size:30px;margin:40px;">
         <pre>
 
-          Professor $row[1] $row[2]
-          Email        $row[3]
-          Phone        $row[4]
+          <h4>Professor $row[1] $row[2]</h4>
+          
+          <h4>Email</h4> $row[3]
+          <h4>Phone</h4> $row[4]
 
 _END;
 
@@ -96,19 +98,18 @@ _END;
       $result->data_seek($j);
       $row = $result->fetch_array(MYSQLI_NUM);
       echo <<<_END
-        <div class ="set">
+
         <pre>
-          Student Approval    $row[0]
+          <span style="color:blue">Student Approval</span>    $row[0]
         </pre>
 
           <form action="profInfo.php" method="post" class="button">
             <input type="hidden" name="delete" value="yes">
             <input type="hidden" name="profID" value="$row[1]">
-            <input type="submit" value="DELETE RECORD">
+            <!-- <input type="submit" value="DELETE RECORD"> -->
           </form>
           </div>
 
-          </div>
 _END;
 
   }
