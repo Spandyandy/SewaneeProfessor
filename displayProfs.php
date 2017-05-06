@@ -37,7 +37,7 @@
 
 
 <?php
-  // DISPLAYING DATA IN TABLES
+  // DISPLAYING all professors
   $query = "SELECT * FROM profTable";
 
   $result = $connection->query($query);

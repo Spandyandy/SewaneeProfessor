@@ -1,4 +1,5 @@
 <?php require_once('header.php') ?>
+
 <!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
@@ -41,7 +42,7 @@
 <?php
 
 
-  // DISPLAYING DATA IN TABLES
+  // DISPLAYING all departments
   $query = "SELECT * FROM departments";
 
   $result = $connection->query($query);

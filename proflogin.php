@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Sewanee Professor</title>
+		<title>Sewanee Professor Login</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" />
@@ -52,7 +52,7 @@
 
   }else{
 
-   // Setup for PRINTING entry from table
+   // Setup for PRINTING Professors info
   $profID = get_post($connection, 'prof');
 
   $query = "SELECT * FROM profTable WHERE profID = $profID";
@@ -78,7 +78,7 @@ _END;
   }
 
 
-
+  // Shows the number of likes professor has
   $query = "SELECT COUNT(*),profTable.profID FROM profTable, hasLiked
             WHERE profTable.profID = hasLiked.profID
             AND   profTable.profID = $profID";

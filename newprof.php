@@ -6,14 +6,6 @@
    Checkpoint 4
 -->
 
-<?php
-  // Usual connection to database
-  require_once('login.php');
-
-  $connection = new mysqli( $host, $user, $pass, $db );
-  if ($connection->connect_error) die ('did not connect!');
-
-?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -39,14 +31,17 @@
   		</ul>
   	</div>
 
+
+
 <span style="display:block; height: 100px;"></span>
     <div class="row">
       <h1 id="moto"><span>Click "DELETE RECORD"</span> button <br> in order to <span>delete</span> this professor's information.</h1>
+      <h1 id="moto"><span>THIS PAGE IS NOT OPERATIONAL YET. COMING SOON!</span></h1>
     </div>
 
- <?php  
+
  
- /*echo <<<_END 
+
   <form action = "newprof.php">
     First name:<br>
     <input type="text" name="first_name" value="">
@@ -68,7 +63,7 @@
     Select your department then enter your class number.<br>
     <select class="dept">
       <option value=""></option>
-_END;*/
+<?php
 
        
          $query = "SELECT * FROM departments";
@@ -82,9 +77,8 @@ _END;*/
       $row = $result->fetch_array(MYSQLI_NUM);
       echo "<option style='line-height: 50px; name='dept' value=$row[0]> $row[1] <br> </option>";
     }     
-  /*  
-       echo <<<_END    
-        
+
+?>
     </select>
     <input type="text" name="class1" value="101">
     <br><br>
@@ -113,8 +107,8 @@ _END;*/
     Select your department then enter your class number.<br>
     <select class="dept">
       <option value=""></option>
-_END;
-      
+
+<?php      
          $query = "SELECT * FROM departments";
          $result = $connection->query($query);
          if (!$result) die ("Database access failed!!: " . $connection->error);
@@ -125,11 +119,8 @@ _END;
            $row = $result->fetch_array(MYSQLI_NUM);
            echo "<option style='line-height: 50px; name='dept' value=$row[0]> $row[1] <br> </option>";
         }     
-       echo <<<_END
 
-            <input style='line-height: 50px;' type="radio" name="dept" value="$row[0]"> $row[1] $row[2] <br>
-
-   
+?>   
     </select>
     <input type="text" name="class2" value="101">
     <br><br>
@@ -158,14 +149,15 @@ _END;
     <input type="submit" value="Submit">
 </form>	
 
-_END;
 
+<?php
+/*
   // Setup for inserting entries
- /* if (isset($_POST['first_name'])&&
+  if (isset($_POST['first_name'])&&
       isset($_POST['last_name']) &&
       isset($_POST['phone'])     &&
       isset($_POST['email'])     &&
-      isset($_POST['password']) ){*/
+      isset($_POST['password']) ){
       
    echo "<br><br>In here...<br><br>";
    
@@ -198,7 +190,7 @@ _END;
     return $connection->real_escape_string($_POST[$var]);
   }
 
-
+*/
 ?>
 
 <span style="display:block; height: 200px;"></span>
