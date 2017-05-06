@@ -1,3 +1,5 @@
+<?php require_once('header.php') ?>
+
 <!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
@@ -35,18 +37,11 @@
     </div>
 
 <?php
-  // Usual connection to database
-  require_once('login.php');
-  $connection = new mysqli( $host, $user, $pass, $db );
-  if ($connection->connect_error) die ('did not connect!');
 
 
-
+  // List professors in department
   $deptID = get_post($connection, 'dept');
-
   if($deptID == '') echo "Go back and try again.";
-
-
   $query = "SELECT profTable.profID,first_name, last_name, dept, courseNo FROM profTable,whoTeachesWhat,departments
      WHERE whoTeachesWhat.deptID = departments.deptID
      AND  whoTeachesWhat.profID = profTable.profID
