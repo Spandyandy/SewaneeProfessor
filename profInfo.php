@@ -1,8 +1,41 @@
+<?php require_once('header.php') ?>
 <!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
    Checkpoint 4
 -->
+
+<style>
+#like{
+  background:#0093C4;
+  float:right;
+  margin-right:40px
+}
+
+table{
+  background:white;
+  
+}
+
+th, td {
+    padding: 15px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr.top{
+  color:blue;
+}
+
+#unlike{  
+  float:right;
+  margin-right:40px
+}
+
+</style>
 
 <!DOCTYPE html>
 <html>
@@ -25,11 +58,7 @@
   			</form>
   		</div>
   		<ul>
-		    <li><a href="about.html">About</a></li>
-			<li><a href="displayProfs.php">Professor List</a></li>
-			<li><a href="department.php">Departments</a></li>
-			<li><a href="createaccount.php">Student Sign Up</a></li>
-			<li><a href="accountlogin.php">Student Log in</a></li>
+                  <?php $loggedin ? navItemsLoggedin() : navItems();?>
   		</ul>
   	</div>
 
@@ -40,35 +69,26 @@
 
 
 <?php
-  // Usual connection to database
-  require_once('login.php');
+    
+    // Get profID info from link    
+    if(isset($_GET["profID"]) ){
+        $profIDlink = $_GET["profID"];
 
-  $connection = new mysqli( $host, $user, $pass, $db );
-  if ($connection->connect_error) die ('did not connect!');
+    }
+    
+  
+  // If profID is set from link (as in userinfo.php) then post that, else get from submit
+  $profID = get_post($connection, 'prof');  
+  if($profIDlink!="") $profID = $profIDlink;
 
-     // Setup for deleting entry from table
-  if(isset($_POST['delete']) && isset($_POST['profID'])){
-    $profID = get_post($connection, 'profID');
-    $query = "DELETE FROM profTable WHERE profID = $profID";
-
+  if($profID != ""){
+    $query = "SELECT * FROM profTable WHERE profID = $profID";
     $result = $connection->query($query);
 
-    if(!$result) echo "DELETE failed: $query <br>".$connection->error."<br><br>";
-    echo"Your account was deleted. Thanks for your service!<br>";
-
-  }else{
-
-   // Setup for PRINTING entry from table
-  $profID = get_post($connection, 'prof');
-
-  $query = "SELECT * FROM profTable WHERE profID = $profID";
-
-  $result = $connection->query($query);
-
-  if (!$result) die ("Database access failed!!: " . $connection->error);
+    if (!$result) die ("Database access failed!!: " . $connection->error);
     $rows = $result->num_rows;
 
- for ($j = $rows-1 ; $j >= 0; $j--){
+    for ($j = $rows-1 ; $j >= 0; $j--){
       $result->data_seek($j);
       $row = $result->fetch_array(MYSQLI_NUM);
       echo <<<_END
@@ -82,10 +102,66 @@
 
 _END;
 
-  }
+    }
+  
+  
+  
 
 
+ // Displays classes that they teach for Advent 2017
+    $query = " SELECT whoTeachesWhat.registerID, abbr,courseNo,dept,period,year  
+     FROM profTable, whoTeachesWhat,whatIsTaughtWhen, semester,departments
+            WHERE whoTeachesWhat.profID = $profID
+            AND   period = 'Advent'
+            AND   year = 2017
+            AND   departments.deptID = whoTeachesWhat.deptID
+            AND   whoTeachesWhat.profID = profTable.profID
+            AND   whoTeachesWhat.registerID = whatIsTaughtWhen.registerID      
+            AND   whatIsTaughtWhen.semesterID = semester.semesterID       "; 
+     
+    $result = $connection->query($query);            
+    if (!$result) die ("Database access failed!!: " . $connection->error);
+    $rows2 = $result->num_rows;
 
+    echo "<div style ='margin-left:20%;'>";
+    echo "<br><br><h5 style='color:red;margin-left:20%;'>Classes Taught for Advent 2017</h5> <table style='width:75%;font-size:30px;'>";
+    echo " <tr class='top'><th>REGISTER ID</th> <th>CLASS</th> <th>DEPARTMENT</th> <th>YEAR</th> </tr><br>";
+    for ($k = 0 ; $k < $rows2; $k++){
+      $result->data_seek($j);
+      $row2 = $result->fetch_array(MYSQLI_NUM);
+      echo " <tr><th>$row2[0]</th> <th>$row2[1] $row2[2]</th> <th>$row2[3]</th> <th>$row2[5]</th> </tr>";
+    }
+  echo "</table></div>";
+  
+  // Displays like if user has not yet liked, and vice versa  
+  echo "<form action='profInfo.php' method='post' class='button'style=''>";  
+
+  if( $loggedin ) {
+    $username = $_SESSION['username'];
+    $query = "SELECT * from hasLiked 
+                 WHERE username = '$username' 
+                 AND   profID   = $profID";
+    
+    $result = $connection->query($query);            
+    if (!$result) die ("Database access failed!!: " . $connection->error);
+    $rows = $result->num_rows;             
+      
+    if($rows == 0)     
+       echo "<input id='like' type='submit' value='LIKE' >
+          <input type='hidden' name='like' value='yes'>";
+    else
+       echo "<input id='unlike' type='submit' value='UNLIKE' >
+          <input type='hidden' name='unlike' value='yes'>";
+    
+    echo "<input type='hidden' name='profID' value='$profID'>
+        </form>";
+    
+   }
+   
+   echo "<br> <b style='font-size:60px;'> Like button does not work. </b><br> ";
+
+
+  // Displays number of likes
   $query = "SELECT COUNT(*),profTable.profID FROM profTable, hasLiked
             WHERE profTable.profID = hasLiked.profID
             AND   profTable.profID = $profID";
@@ -113,8 +189,7 @@ _END;
 _END;
 
   }
-
- }
+  }else echo "<div class='row'>Please go back and pick a professor!.</div>";
 
 
   $result->close;

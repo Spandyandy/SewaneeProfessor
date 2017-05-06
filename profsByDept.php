@@ -25,11 +25,7 @@
   			</form>
   		</div>
   		<ul>
-		    <li><a href="about.html">About</a></li>
-			<li><a href="displayProfs.php">Professor List</a></li>
-			<li><a href="department.php">Departments</a></li>
-			<li><a href="createaccount.php">Student Sign Up</a></li>
-			<li><a href="accountlogin.php">Student Log in</a></li>
+                  <?php $loggedin ? navItemsLoggedin() : navItems();?>
   		</ul>
   	</div>
 
@@ -65,9 +61,9 @@
     
   if($rows == 0)  
     echo "<div style='text-align:center;font-size:60px;color:gray;'><i>(No professors listed here yet.)</i></div>";
+  else{
 
   echo '<pre><form action="profInfo.php" method="post"> <div class ="set">' ;
-
     for ($j = $rows-1 ; $j >= 0; $j--){
       $result->data_seek($j);
       $row = $result->fetch_array(MYSQLI_NUM);
@@ -81,7 +77,7 @@ _END;
 
   echo '<input type="submit" value="SELECT PROFESSOR">
        </div> </form></pre>';
-
+  }
 
   $result->close;
   $connection->close;

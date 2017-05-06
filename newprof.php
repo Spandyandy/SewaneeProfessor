@@ -1,3 +1,5 @@
+<?php require_once('header.php') ?>
+
 <!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
@@ -33,11 +35,7 @@
   			</form>
   		</div>
   		<ul>
-		    <li><a href="about.html">       About</a></li>
-			<li><a href="displayProfs.php"> Professor List</a></li>
-			<li><a href="department.php">   Departments</a></li>
-			<li><a href="createaccount.php">Student Sign Up</a></li>
-			<li><a href="accountlogin.php"> Student Log in</a></li>
+                  <?php $loggedin ? navItemsLoggedin() : navItems();?>
   		</ul>
   	</div>
 
@@ -116,7 +114,7 @@ _END;*/
     <select class="dept">
       <option value=""></option>
 _END;
-      */
+      
          $query = "SELECT * FROM departments";
          $result = $connection->query($query);
          if (!$result) die ("Database access failed!!: " . $connection->error);

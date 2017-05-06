@@ -1,3 +1,5 @@
+<?php require_once('header.php') ?>
+
 <!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
@@ -40,39 +42,34 @@
 
 
 <?php
-  // Usual connection to database
-  require_once('login.php');
-
-  $connection = new mysqli( $host, $user, $pass, $db );
-  if ($connection->connect_error) die ('did not connect!');
-  
-  
-
    // Setup for PRINTING entry from table
+   
+   //destroy_session();
    
   if (isset($_POST['username']) &&
       isset($_POST['password']) ) {
- 
+            
   $username = get_post($connection, 'username');
-  $password = get_post($connection, 'password');
-
+  $password = get_post($connection, 'password'); 
+  
+  
+  $_SESSION['username'] = $username; 
+  
+  
   $loginresult = "";
   $query = "SELECT * FROM studentTable WHERE username='$username' AND password='$password'";
-  
-  //echo $query."<br>";
-  
   $result = $connection->query($query);
+  
 
-    if (!$result) die ("Database access failed!!: " . $connection->error);
-      $rows = $result->num_rows;
+  if (!$result) die ("Database access failed!!: " . $connection->error);
+  $rows = $result->num_rows;     
       
-      
-      if($rows == 1)
-        for ($j = 0 ; $j < $rows; $j++){
-          $result->data_seek($j);
-          $row = $result->fetch_array(MYSQLI_NUM);
+  if($rows == 1){
+    for ($j = 0 ; $j < $rows; $j++){
+      $result->data_seek($j);
+      $row = $result->fetch_array(MYSQLI_NUM);
           
-          $loginresult = "<br><br> You logged in successfully <span style='color:#03A2AB;'>$row[0]</span>! <br><br>
+      $loginresult = "<br><br> You logged in successfully <span style='color:#03A2AB;'>$row[0]</span>! <br><br>
                          You can view your information <a href='userinfo.php' style='font-size:60px;'><span>here</span></a>.<br>";
                          
          /*  echo <<<_END 
@@ -80,17 +77,17 @@
            <input type='hidden' name='username' value='$row[0]'>
            </form>
 _END;*/
-        }
-      else $loginresult = "<br>Wrong username/password! Try again!<br>";
+    }
+ 
+ }else $loginresult = "<br>Wrong username/password! Try again!<br>";
       
 
   
   }
       echo <<<_END
          <form action="accountlogin.php" method="post"><pre>
-         Username:  <input type="text"     name="username" value='youngstunna'> <br><br><br>
-         Password:  <input type="password" name="password" value='vegeta'>
-        
+         Username:  <input type="text"     name="username" value=''> <br><br><br>
+         Password:  <input type="password" name="password" value=''>
         <input type="submit" value="LOG IN">
         
         </pre></form>
@@ -103,6 +100,7 @@ _END;
 
   $result->close;
   $connection->close;
+
 
   // the get_post function called
   function get_post($connection, $var){

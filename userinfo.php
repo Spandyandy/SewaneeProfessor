@@ -1,3 +1,4 @@
+<?php require_once('header.php') ?>
 <!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
@@ -9,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Detailed Professor Information</title>
+		<title>User Information</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" />
@@ -27,27 +28,15 @@
   			</form>
   		</div>
   		<ul>
-		    <li><a href="about.html">About</a></li>
-			<li><a href="displayProfs.php">Professor List</a></li>
-			<li><a href="department.php">Departments</a></li>
-			<li><a href="createaccount.php">Student Sign Up</a></li>
-			<li><a href="accountlogin.php">Student Log in</a></li>
+                  <?php $loggedin ? navItemsLoggedin() : navItems();?>
   		</ul>
   	</div>
 
 <span style="display:block; height: 100px;"></span>
-    <div class="row">
-      <h1 id="moto">USER INFORMATION</h1>
-    </div>
+
 
 
 <?php
-  // Usual connection to database
-  require_once('login.php');
-
-  $connection = new mysqli( $host, $user, $pass, $db );
-  if ($connection->connect_error) die ('did not connect!');
-
      // Setup for deleting entry from table
   if(isset($_POST['delete']) && isset($_POST['username'])){
     $username = get_post($connection, 'username');
@@ -58,33 +47,79 @@
     if(!$result) echo "DELETE failed: $query <br>".$connection->error."<br><br>";
     echo"Your account was deleted. Thanks for your service!<br>";
 
-  }else{
+  }
+  
+  // LOGOUT
+  if(isset($_POST['logout'])) destroy_session();
+  
+  
+  // User Info
+  if( isset($_SESSION['username']) ){
+    $username = $_SESSION['username'];
+  
 
-   // Setup for PRINTING entry from table
-  $username = get_post($connection, 'username');
+    $query = "SELECT * FROM studentTable WHERE username = '$username'";
+    $result = $connection->query($query);
 
-  $query = "SELECT * FROM studentTable WHERE username = '$username'";
-
-  $result = $connection->query($query);
-
-  if (!$result) die ("Database access failed!!: " . $connection->error);
+    if (!$result) die ("Database access failed!!: " . $connection->error);
     $rows = $result->num_rows;
 
- for ($j = $rows-1 ; $j >= 0; $j--){
+    for ($j = $rows-1 ; $j >= 0; $j--){
       $result->data_seek($j);
       $row = $result->fetch_array(MYSQLI_NUM);
       echo <<<_END
-        <div class ="set" style="background:#F9C7FF;font-size:30px;margin:40px;">
-        <pre>
-
-          <h4> $row[1] $row[2]</h4>
-          
-          <h4>Email</h4> $row[3]
-          <h4> </h4> $row[4]
+        <div class="row">
+          <h1 id="moto">USER INFORMATION</h1>
+        </div>
+        <div class ="set" style="background:#F9C7FF;font-size:30px;margin:40px;text-align:center">
+          <h4> Name:</h4> $row[0]
+          <h4>Email:</h4> $row[2] 
+          <h4>Year you started school in Sewanee:</h4>$row[3]
+      
 
 _END;
+
+
+    $query = "SELECT first_name,last_name,hasLiked.profID FROM profTable,hasLiked,studentTable 
+              WHERE hasLiked.username = '$username'
+              AND   hasLiked.profID = profTable.profID 
+              AND   hasLiked.username = studentTable.username";
+             
+    $result = $connection->query($query);
+
+    if (!$result) die ("Database access failed!!: " . $connection->error);
+    $rows = $result->num_rows;
+
+
+    echo "<br><br><br><br><br><br><br><br>
+     <h2>Professors You Have Liked</h2>";
+     
+    if($rows==0) echo "Go like some professors!!!";
+    else{
+      for ($j = $rows-1 ; $j >= 0; $j--){
+        $result->data_seek($j);
+        $row = $result->fetch_array(MYSQLI_NUM);
+        echo <<<_END
+          <a href="profInfo.php?profID=$row[2]" style="font-size: 48px;color:orange"> $row[0]  $row[1] </a><br>       
+_END;
+      }
     }
-  }
+  echo "</div>";
+
+  echo <<<_END
+    <form action="userinfo.php" method="post">
+      <input type="submit" value="LOG OUT">
+      <input type="hidden" value="yes" name="logout">
+    </form>
+
+_END;
+
+    }
+  }else echo "<div id='moto' style='text-align:center'><br>
+               You're logged out! Click 
+              <a href='accountlogin.php' style='font-size:60px;'><span>here</span></a> 
+              to log in again.
+              <br></div>";
 
   $result->close;
   $connection->close;
