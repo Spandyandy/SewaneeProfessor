@@ -1,3 +1,8 @@
+
+//Junghoo Kim
+//Emmanuel Oluloto
+//CS 284
+
 //Right arrow
 function nextSlide(){
 	var currentSlide = $('.slide.active');
@@ -5,14 +10,14 @@ function nextSlide(){
 	var currentDot = $('.dot.active');
 	var nextDot = currentDot.next();
 
-	currentSlide.fadeOut(700).removeClass('active');
-	nextSlide.fadeIn(700).addClass('active');
+	currentSlide.fadeOut(1000).removeClass('active');
+	nextSlide.fadeIn(1000).addClass('active');
 	currentDot.removeClass('active');
 	nextDot.addClass('active');
 
 
 	if(nextSlide.length == 0){
-		$('.slide').first().fadeIn(700).addClass('active');
+		$('.slide').first().fadeIn(1000).addClass('active');
 		$('.dot').first().addClass('active');
 	}
 }
@@ -28,8 +33,8 @@ function prevSlide(){
 	var currentDot = $('.dot.active');
 	var prevDot = currentDot.prev();
 
-	currentSlide.fadeOut(700).removeClass('active');
-	prevSlide.fadeIn(700).addClass('active');
+	currentSlide.fadeOut(1000).removeClass('active');
+	prevSlide.fadeIn(1000).addClass('active');
 	currentDot.removeClass('active');
 	prevDot.addClass('active');
 
@@ -44,9 +49,9 @@ $('#left-jumbotron').click(function(){
 	prevSlide();
 });
 
-// Automatically reveal next slide in 4sec
+// Automatically reveal next slide in 5sec
 $(document).ready(function() {
-	setInterval(nextSlide, 4000);
+	setInterval(nextSlide, 5000);
 });
 
 
@@ -55,7 +60,7 @@ $(document).ready(function() {
 $(window).scroll(function(){
 	var currentPos = $(this).scrollTop();
 	var topNav = $('.top-nav');
-	var dot = $('.dot');
+	var dot = $('#left-jumbotron');
 	if(currentPos >= dot.offset().top){
 		topNav.addClass('active');
 	}else{

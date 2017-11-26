@@ -3,7 +3,6 @@
 <!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
-   Checkpoint 4
 -->
 
 <!DOCTYPE html>

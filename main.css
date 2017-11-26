@@ -1,3 +1,10 @@
+/*
+* Junghoo Kim
+* Emmanuel Oluloto
+* CS 284
+*
+*
+*/
 /* main.css */
 
 body {
@@ -88,6 +95,9 @@ li {
 	body {
 		font-size: 30px;
 	}
+	.top-nav{
+		position: relative;
+	}
 	.top-nav ul{
 		list-style: none;
 	}
@@ -107,6 +117,39 @@ li {
 		float: left;
 		width:100%;
 		margin: 0;
+	}
+	.top-nav.active{
+		display: none;
+	}
+	.slide.active{
+		position:relative;
+		height:50%;
+	}
+	#jumbotron-wrapper {
+		position: relative;
+		width: 100%;
+		height: 50%;
+	}
+	#slides-wrapper {
+		position: absolute;
+		width: 100%;
+		height: 50%;
+	}
+	.slide {
+		height: 50%;
+		display: none;
+	}
+	#jumbotron-arrow-wrapper{
+	display: none;
+	}
+	.jumbotron-arrow{
+	display: none;
+	}
+	.dot{
+		display: none;
+	}
+	.dot.active{
+		display: none;
 	}
 }
 

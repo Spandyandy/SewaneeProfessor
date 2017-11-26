@@ -2,7 +2,6 @@
 <!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
-   Checkpoint 4
 -->
 
 /*Does not work yet*/

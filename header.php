@@ -1,9 +1,7 @@
- <!--Junghoo Kim
+<!--Junghoo Kim
   Emmanuel Oluloto
    CS 284
-   Checkpoint 4
 -->
- 
   <?php session_start();
   
     // Usual connection to database
